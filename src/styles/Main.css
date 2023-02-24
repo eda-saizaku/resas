@@ -1,0 +1,14 @@
+.title {
+  text-align: center;
+}
+.container {
+  width: clamp(50px, 80%, 1000px);
+  margin: 0 auto;
+}
+.selector .selector-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+.selector .selector-list .selector-list-item {
+  list-style: none;
+}
