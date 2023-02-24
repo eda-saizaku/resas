@@ -53,15 +53,15 @@ function Main() {
   return (
     <div>
       <header className="title">RESAS</header>
-      <section class="container">
-        <div class="selector">
-          <div class="selector-title">都道府県</div>
-          <ul class="selector-list">
-            {states.map((state) => {
+      <section className="container">
+        <div className="selector">
+          <div className="selector-title">都道府県</div>
+          <ul className="selector-list">
+            {states.map((state, i) => {
               return (
-                <li class="selector-list-item">
+                <li key={i} className="selector-list-item">
                   <p>
-                    <label for={`checkbox-${state}`}>{state}</label>
+                    <label htmlFor={`checkbox-${state}`}>{state}</label>
                     <input
                       id={`checkbox-${state}`}
                       name={`checkbox-${state}`}
@@ -73,7 +73,7 @@ function Main() {
             })}
           </ul>
         </div>
-        <div class="chart"></div>
+        <div className="chart"></div>
       </section>
     </div>
   )
