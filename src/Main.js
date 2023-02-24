@@ -1,5 +1,5 @@
 import './styles/Main.css'
-
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
 const states = [
   '北海道',
   '青森県',
@@ -50,6 +50,12 @@ const states = [
   '沖縄県',
 ]
 function Main() {
+  const data = [
+    { name: '1980', 東京: 200000, 神奈川: 250000 },
+    { name: '1990', 東京: 400000, 神奈川: 500000 },
+    { name: '2000', 東京: 450000, 神奈川: 560000 },
+    { name: '2010', 東京: 700000, 神奈川: 900000 },
+  ]
   return (
     <div>
       <header className="title">RESAS</header>
@@ -69,7 +75,17 @@ function Main() {
             })}
           </ul>
         </div>
-        <div className="chart"></div>
+        <div className="chart">
+          <LineChart width={400} height={400} data={data}>
+            <Line type="monotone" dataKey="東京" stroke="#8884d8" />
+            <Line type="monotone" dataKey="神奈川" stroke="#322454" />
+            <CartesianGrid stroke="#ccc" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+          </LineChart>
+        </div>
       </section>
     </div>
   )
