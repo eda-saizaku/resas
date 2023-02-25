@@ -1,55 +1,29 @@
 import './styles/Main.css'
+import React from 'react'
+import axios from 'axios'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
-const states = [
-  '北海道',
-  '青森県',
-  '岩手県',
-  '宮城県',
-  '秋田県',
-  '山形県',
-  '福島県',
-  '茨城県',
-  '栃木県',
-  '群馬県',
-  '埼玉県',
-  '千葉県',
-  '東京都',
-  '神奈川県',
-  '新潟県',
-  '富山県',
-  '石川県',
-  '福井県',
-  '山梨県',
-  '長野県',
-  '岐阜県',
-  '静岡県',
-  '愛知県',
-  '三重県',
-  '滋賀県',
-  '京都府',
-  '大阪府',
-  '兵庫県',
-  '奈良県',
-  '和歌山県',
-  '鳥取県',
-  '島根県',
-  '岡山県',
-  '広島県',
-  '山口県',
-  '徳島県',
-  '香川県',
-  '愛媛県',
-  '高知県',
-  '福岡県',
-  '佐賀県',
-  '長崎県',
-  '熊本県',
-  '大分県',
-  '宮崎県',
-  '鹿児島県',
-  '沖縄県',
-]
+
 function Main() {
+  const [prefectures, setPrefectures] = React.useState(null)
+
+  React.useEffect(() => {
+    const baseURL = 'https://opendata.resas-portal.go.jp'
+    axios
+      .get(baseURL + '/api/v1/prefectures', {
+        headers: {
+          'X-API-KEY	': process.env.REACT_APP_API_KEY,
+        },
+      })
+      .then((res) => {
+        if (res?.data?.result?.length > 0) {
+          setPrefectures(res?.data?.result)
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [])
+  if (!prefectures) return null
   const data = [
     { name: '1980', 東京: 200000, 神奈川: 250000 },
     { name: '1990', 東京: 400000, 神奈川: 500000 },
@@ -63,12 +37,16 @@ function Main() {
         <div className="selector">
           <div className="selector-title">都道府県</div>
           <ul className="selector-list">
-            {states.map((state, i) => {
+            {prefectures.map((state, i) => {
               return (
                 <li key={i} className="selector-list-item">
                   <p>
-                    <label htmlFor={`checkbox-${state}`}>{state}</label>
-                    <input id={`checkbox-${state}`} name={`checkbox-${state}`} type="checkbox" />
+                    <label htmlFor={`checkbox-${state.prefName}`}>{state.prefName}</label>
+                    <input
+                      id={`checkbox-${state.prefName}`}
+                      name={`checkbox-${state.prefName}`}
+                      type="checkbox"
+                    />
                   </p>
                 </li>
               )
