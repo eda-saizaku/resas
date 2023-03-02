@@ -12,3 +12,7 @@
 .selector .selector-list .selector-list-item {
   list-style: none;
 }
+.recharts-surface {
+  width: 800;
+  height: 800;
+}
