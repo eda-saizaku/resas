@@ -79,13 +79,13 @@ function Main() {
               return (
                 <li key={i} className="selector-list-item">
                   <p>
-                    <label htmlFor={`checkbox-${state.prefName}`}>{state.prefName}</label>
                     <input
                       id={state.prefCode}
                       name={state.prefName}
                       type="checkbox"
                       onChange={handleChange}
                     />
+                    <label htmlFor={`checkbox-${state.prefName}`}>{state.prefName}</label>
                   </p>
                 </li>
               )
